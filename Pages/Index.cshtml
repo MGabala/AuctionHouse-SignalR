@@ -3,32 +3,33 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-
-<div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Przedmiot</th>
-                <th>Cena</th>
-                <th>Propozycja</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var auction in Model.Auctions)
-            {
+<div class="row">
+    <div class="col-md-10 col-md-offset-2">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@auction.ItemName</td>
-                    <td>@auction.CurrentBid</td>
-                    <td>
-                    <form method="post">
-                        <input name="newBid" id="@auction.Id" value="@(auction.CurrentBid + 1)" />
-                        <button type="submit" class="btn btn-sm btn-primary" asp-page-handler="Bid"
-                        asp-route-auctionId="@auction.Id">Licytuj</button>
-                    </form>
-                     </td>
+                    <th>Item</th>
+                    <th class="textright">Current bid</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var auction in Model.Auctions)
+                {
+                    <tr id="@auction.Id-tr" class="align-middle">
+                        <td>@auction.ItemName</td>
+                        <td id="@auction.Id-bidtext" class="bid">@auction.CurrentBid</td>
+                        <td class="bid-form-td">
+                            <input id="@auction.Id-input" class="bid-input" type="number" value="@(auction.CurrentBid + 1)" />
+                            <button class="btn btn-primary" type="button" onclick="submitBid(@auction.Id)">Bid</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+@section scripts {
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/homeindex.js" asp-append-version="true"></script>
+}
