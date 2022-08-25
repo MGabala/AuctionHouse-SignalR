@@ -3,6 +3,6 @@
     public interface IAcutionRepository 
     {
         public Task<IEnumerable<Auction>> GetAllAsync();
-       public void NewBid(Auction auction, int newBid);
+       public Task NewBid(int id, int newBid);
     }
 }

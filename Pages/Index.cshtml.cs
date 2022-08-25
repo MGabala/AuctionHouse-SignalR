@@ -26,7 +26,7 @@ namespace AuctionHouse_SignalR.Pages
         public async Task<IActionResult> OnPostBid(int auctionId, int newBid)
         {
             _Auction.Id = auctionId;
-            _repository.NewBid(_Auction, newBid);
+           // _repository.NewBid(_Auction, newBid);
             return RedirectToPage("Index");
         }
     }

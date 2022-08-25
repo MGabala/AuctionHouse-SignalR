@@ -31,4 +31,5 @@ const submitBid = (auctionId) => {
         }
     });
     connection.invoke("NotifyNewBid", { auctionId: parseInt(auctionId), newBid: parseInt(bid) });
+    connection.invoke("OnPostBid")
 }

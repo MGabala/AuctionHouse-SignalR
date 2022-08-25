@@ -20,9 +20,9 @@ namespace AuctionHouse_SignalR.Repositories
             return await _context.Auctions.ToListAsync();
         }
 
-        public async void NewBid(Auction auction, int newBid)
+        public async Task NewBid(int id, int newBid)
         {
-            var auctionforupdate = _context.Auctions.SingleOrDefault(x => x.Id == auction.Id);
+            var auctionforupdate = _context.Auctions.SingleOrDefault(x => x.Id == id);
             auctionforupdate.CurrentBid = newBid;
             await _context.SaveChangesAsync();
         }
