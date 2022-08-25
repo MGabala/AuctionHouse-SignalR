@@ -10,6 +10,8 @@ namespace AuctionHouse_SignalR.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly IAcutionRepository _repository;
         public IEnumerable<Auction> Auctions { get; set; }
+        [BindProperty]
+        public Auction _Auction { get; set; } = null!;
 
         public IndexModel(ILogger<IndexModel> logger, IAcutionRepository repository)
         {
@@ -19,11 +21,13 @@ namespace AuctionHouse_SignalR.Pages
 
         public async Task OnGetAsync()
         {
-            Auctions = _repository.GetAll();
+            Auctions = await _repository.GetAllAsync();
         }
-        public async Task<IActionResult> OnPostNewBid(int auctionId, int newBid)
+        public async Task<IActionResult> OnPostBid(int auctionId, int newBid)
         {
-            return Page();
+            _Auction.Id = auctionId;
+            _repository.NewBid(_Auction, newBid);
+            return RedirectToPage("Index");
         }
     }
 }

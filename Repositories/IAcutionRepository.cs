@@ -2,7 +2,7 @@
 {
     public interface IAcutionRepository 
     {
-        IEnumerable<Auction> GetAll();
-        void NewBid(int auctionId, int newBid);
+        public Task<IEnumerable<Auction>> GetAllAsync();
+       public void NewBid(Auction auction, int newBid);
     }
 }

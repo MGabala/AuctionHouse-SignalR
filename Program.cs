@@ -10,12 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<AuctionContext>(db_config => db_config.UseSqlite(builder.Configuration["ConnectionStrings:DB"]));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
-builder.Services.AddTransient<IAcutionRepository, AuctionMemoryRepository>();
+builder.Services.AddTransient<IAcutionRepository, AuctionRepository>();
 
 var app = builder.Build();
 
