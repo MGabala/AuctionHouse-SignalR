@@ -4,14 +4,31 @@
     ViewData["Title"] = "Home page";
 }
 
-@foreach (var auction in Model.Auctions)
-{
-     <tr>
-         <td>@auction.ItemName</td><td>@auction.CurrentBid</td><br>
-            <form method="post">
-            <input name="newBid" id="@auction.Id" value="@(auction.CurrentBid + 1)" />
-              <button type="submit" class="btn btn-sm btn-danger" asp-page-handler="Bid" 
-                asp-route-auctionId="@auction.Id" >Przycisk</button>
-            </form>
-     </tr>
-}
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Przedmiot</th>
+                <th>Cena</th>
+                <th>Propozycja</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var auction in Model.Auctions)
+            {
+                <tr>
+                    <td>@auction.ItemName</td>
+                    <td>@auction.CurrentBid</td>
+                    <td>
+                    <form method="post">
+                        <input name="newBid" id="@auction.Id" value="@(auction.CurrentBid + 1)" />
+                        <button type="submit" class="btn btn-sm btn-primary" asp-page-handler="Bid"
+                        asp-route-auctionId="@auction.Id">Licytuj</button>
+                    </form>
+                     </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
