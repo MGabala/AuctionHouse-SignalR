@@ -21,5 +21,9 @@ namespace AuctionHouse_SignalR.Pages
         {
             Auctions = _repository.GetAll();
         }
+        public async Task<IActionResult> OnPostNewBid(int auctionId, int newBid)
+        {
+            return Page();
+        }
     }
 }

@@ -22,7 +22,9 @@
                         <td id="@auction.Id-bidtext" class="bid">@auction.CurrentBid</td>
                         <td class="bid-form-td">
                             <input id="@auction.Id-input" class="bid-input" type="number" value="@(auction.CurrentBid + 1)" />
-                            <button class="btn btn-primary" type="button" onclick="submitBid(@auction.Id)">Bid</button>
+                            <form method="post">
+                                <button type="submit" class="btn btn-sm btn-danger" asp-page-handler="NewBid" asp-route-newBid="@auction.CurrentBid" asp-route-id="@auction.Id">Przycisk</button>
+                            </form>
                         </td>
                     </tr>
                 }
