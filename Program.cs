@@ -1,4 +1,5 @@
 using AuctionHouse_SignalR.Data;
+using AuctionHouse_SignalR.Hubs;
 using AuctionHouse_SignalR.Repositories;
 
 using Microsoft.AspNetCore.Identity;
@@ -11,7 +12,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDbContext<AuctionContext>(db_config => db_config.UseSqlite(builder.Configuration["ConnectionStrings:DB"]));
-
+builder.Services.AddSignalR();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -42,5 +43,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+app.MapHub<AuctionHub>("/auctionhub"); 
 app.Run();
