@@ -1,4 +1,5 @@
 using AuctionHouse_SignalR.Data;
+using AuctionHouse_SignalR.Repositories;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+builder.Services.AddTransient<IAcutionRepository, AuctionMemoryRepository>();
 
 var app = builder.Build();
 
